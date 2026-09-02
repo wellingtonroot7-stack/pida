@@ -1,4 +1,5 @@
-name: Gerar APK Flet Atualizado
+name: Gerar APK
+
 on:
   push:
     branches: [ main ]
@@ -7,23 +8,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Baixar código
+        uses: actions/checkout@v4
 
       - name: Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.12"
 
-      - name: Instalar Dependencias
+      - name: Instalar dependências
         run: |
-          pip install flet-cli
-          pip install openpyxl
+          python -m pip install --upgrade pip
+          pip install flet openpyxl
 
-      - name: Compilar APK via Web
-        run: flet build apk --no-android-sdk
+      - name: Gerar APK
+        run: |
+          flet build apk
 
-      - name: Disponibilizar APK para Download
+      - name: Disponibilizar APK
         uses: actions/upload-artifact@v4
         with:
           name: meu-aplicativo-vendas
