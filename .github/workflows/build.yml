@@ -22,3 +22,9 @@ jobs:
 
       - name: Compilar APK via Web
         run: flet build apk --no-android-sdk
+
+      - name: Disponibilizar APK para Download
+        uses: actions/upload-artifact@v4
+        with:
+          name: meu-aplicativo-vendas
+          path: build/apk/*.apk
