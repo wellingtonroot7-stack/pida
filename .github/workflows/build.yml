@@ -21,7 +21,7 @@ jobs:
           pip install openpyxl
 
       - name: Compilar Aplicativo
-        run: flet build apk --template web
+        run: flet build apk main.py --template web
 
       - name: Disponibilizar Arquivo
         uses: actions/upload-artifact@v4
