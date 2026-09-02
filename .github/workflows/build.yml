@@ -20,7 +20,7 @@ jobs:
           pip install flet-cli
           pip install openpyxl
 
-           - name: Compilar Aplicativo
+      - name: Compilar Aplicativo
         run: flet build apk --template web
 
       - name: Disponibilizar Arquivo
