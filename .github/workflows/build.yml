@@ -1,8 +1,30 @@
-      - name: Compilar APK Nativo
-        run: flet build apk
+name: Gerar APK Flet Atualizado
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-      - name: Disponibilizar APK para Download
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar Dependencias
+        run: |
+          pip install flet-cli
+          pip install openpyxl
+
+      - name: Compilar Aplicativo
+        run: flet build apk --no-android-sdk
+
+      - name: Disponibilizar Arquivo
         uses: actions/upload-artifact@v4
         with:
           name: meu-aplicativo-vendas
-          path: build/apk/app-release.apk
+          path: build/apk/*.apk
